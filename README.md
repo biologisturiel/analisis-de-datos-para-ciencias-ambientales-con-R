@@ -1,1 +1,1 @@
-# journal_eco_talleres_en_R
+https://biologisturiel.github.io/jc_eco_talleres/
