@@ -1,10 +1,6 @@
 ---
-title: "Ciencia de los Datos en R aplicada a la Conservación de Fauna Silvestre 🐅👨‍💻"
-subtitle: "Sesión 1"
+title: "Análisis de datos para ciencias ambientales con R 🏞️🌎🐅👨‍💻"
 author: "👋 Uriel Torres Zevallos"
-institute: 
-- "Museo de Historia Natural, URP"
-- "Laboratorio de Parasitología, URP"
 date: "`r Sys.Date()`"  
 output:
   xaringan::moon_reader:
@@ -60,60 +56,8 @@ class: inverse, middle, center
 
 ---
 
-## ¿Qué sabemos de R?
-
-.pull-left[<center>😀🔬🐅</center>
-
-.can-edit[
-<ul>
-<li>Aquí puedes dejar tus comentarios :) </li>
-<li> </li>
-<li> </li>
-<li> </li>
-<li> </li>
-<li> </li>
-<li> </li>
-<li> </li>
-<li> </li>
-<li> </li>
-<li> </li>
-<li> </li>
-<li> </li>
-<li> </li>
-<li> </li>
-<li> </li>
-</ul>
-]]
-
-.pull-right[<center>😣😩</center>
-
-.can-edit[
-<ul>
-<li>Y aquí también.</li>
-<li> </li>
-<li> </li>
-<li> </li>
-<li> </li>
-<li> </li>
-<li> </li>
-<li> </li>
-<li> </li>
-<li> </li>
-<li> </li>
-<li> </li>
-<li> </li>
-<li> </li>
-<li> </li>
-<li> </li>
-<li> </li>
-</ul>
-]]
-
----
-
-## Diseño y planificación de investigación
-![](images/red_interaccion_elton1927.png)
-<bf> Elton (1927) </bf>
+class: inverse, middle, center
+# ¿Qué sabemos de R?
 
 ---
 
@@ -126,14 +70,6 @@ class: inverse, middle, center
 <center>
 <img src = "images/conceptos_estadisticos.png" style = "width: 90%"/>
 </center>
-
----
-
-## Unidades de muestreo: ¿Para qué? 
-<center>
-<img src = "images/inext_animado.gif" style = "width: 63%" />
-</center>
-
 
 ---
 
@@ -215,8 +151,9 @@ dev.off()
 ---
 
 ## Paquetes 
+
 ```{r}
-# 20 de mayo a las 01:29 A.M.
+# 01 de marzo a las 13:22 P.M.
 nrow(available.packages())
 ```
 
@@ -227,7 +164,24 @@ img  <- readPNG("images/crecimiento_paquetes.png")
 grid.raster(img)
 ```
 
-[Todos los Paquetes de R](https://www.rdocumentation.org/)
+---
+
+## Instalar e importar un paquete
+
+```{r}
+# install.packages(ggplot2)
+library(ggplot2)
+```
+
+## Instalar e importar varios paquetes
+### Acá encuentras todos los paquetes: 
+[Todos los Paquetes de R](https://cran.r-project.org/web/packages/available_packages_by_name.html)
+
+```{r}
+library(pacman)
+p_load(dplyr, ggplot2) 
+
+```
 
 ---
 
@@ -242,6 +196,11 @@ grid.raster(img)
 ---
 class: center, middle, inverse
 # Conociendo a RStudio: Workspace
+
+---
+
+class: inverse, middle, center
+# La importancia de trabajar con proyectos (Rproj) y un working directory establecido
 
 ---
 
@@ -262,6 +221,12 @@ class: center, middle, inverse
 - Ctrl + 6 = Ir a Plots
 
 - Ctrl + Tab = Mover entre Scripts
+
+---
+
+class: inverse, middle, center
+# Otros archivos que se pueden generar dentro de RStudio
+
 
 ---
 
@@ -598,7 +563,7 @@ class: inverse, middle, center
 
 ### Importar en formato **CSV** (comma-separated values)
 ```{r, echo = T}
-df <- read.csv("/home/biologisturiel/Descargas/talleres_en_R/github_talleres/data/data_emerita.csv",
+df <- read.csv("/home/biologisturiel/Descargas/data/data_emerita.csv",
                header = T,
                sep = ",",
                dec = ".")
@@ -631,7 +596,7 @@ df_excel_drive <- gsheet2tbl("https://docs.google.com/spreadsheets/d/13gV_HUqe55
 ### Importar archivos de más de 3GB (muy pesados)
 ```{r, eval = F}
 library(data.table)
-df_pesada <- fread("/home/biologisturiel/Descargas/talleres_en_R/github_talleres/data/data_emerita.csv")
+df_pesada <- fread("/home/biologisturiel/Descargas/data/data_emerita.csv")
 ```
 
 ---
@@ -646,7 +611,7 @@ df_clipboard <- read.delim("clipboard")
 ### Importar archivos delimitados por espacios (txt) (por ejem [GBIF](https://www.gbif.org/))
 ```{r, eval = F}
 library(data.table)
-df_gbif <- fread("/home/biologisturiel/Descargas/talleres_en_R/github_talleres/data/occurrence.txt")
+df_gbif <- fread("/home/biologisturiel/Descargas/data/occurrence.txt")
 ```
 
 --
@@ -753,42 +718,19 @@ countdown::countdown(minutes = 5, seconds = 00)
 ```
 
 ---
-## Deja tu código abajo:
-
-.can-edit[
-<ul>
-<li>Sí, acá...</li>
-<li> </li>
-<li> </li>
-<li> </li>
-<li> </li>
-<li> </li>
-<li> </li>
-<li> </li>
-<li> </li>
-<li> </li>
-<li> </li>
-<li> </li>
-<li> </li>
-<li> </li>
-<li> </li>
-<li> </li>
-<li> </li>
-</ul>
-]
-
----
 
 # Distribución y teoría de la probabilidad
-- Los datos de ecología casi nunca se adecúan a una distribución normal
+- Se debe buscar que nuestra variable de estudio se ajuste a una distribución normal, esto nos permitirá realizar **pruebas parámetricas**, de lo contrario seguiremos efectuaremos **pruebas no paramétricas**. 
 
-- Los datos de ecología se pueden transformar pero la conclusión sería en función de los datos transformados
+- Los datos se pueden transformar pero la conclusión sería en función de los datos transformados.
 
-- Datos en ecología: Usan distribución de **Poisson** (recuentos) o **Binomial** (presencia o ausencia) sobretodo para GLM
+- Tener en consideración para datos biológicos, en estos se usan: 
+ - Distribución de **Poisson** para datos de recuentos 
+ - Distribución **Binomial** para datos de presencia o ausencia
 
 ---
 
-## Distribución normal
+## Distribución normal (continuas y discretas)
 
 .panelset[
 .panel[.panel-name[Plot]
@@ -819,7 +761,7 @@ ggplot(data = data_normal,
 
 ---
 
-## Distribución de Poisson (recuentos)
+## Distribución de Poisson (recuentos = discretas)
 
 .panelset[
 .panel[.panel-name[Plot]
@@ -876,38 +818,33 @@ ggplot(transform(data.frame(x = c(0:5)), y = dbinom(x, 2, prob = 0.1)), aes(x, y
 ]
 ]
 
+---
+
+# Secuencias aleatorias con distribuciones
+## Distribución normal
+```{r}
+datos_n <- rnorm(n = 20, mean = 4, sd = 1)
+
+datos_n
+```
+
+## Distribución de Poisson
+```{r}
+datos_p <- rpois(n = 20, lambda = 2)
+
+datos_p
+```
 
 ---
 
-## Distribución de una especie (SDM: Species Distribution Model)
-```{r, echo = F, eval = F}
-library(RColorBrewer)
+# Secuencias aleatorias con distribuciones
 
-cols <- brewer.pal(3, "BuGn")
-pal <- colorRampPalette(cols)
+## Distribución binomial
+```{r}
+datos_b <- rbinom(n = 20, size = 30, prob = 0.1)
 
-image(volcano, col = pal(20))
+datos_b
 ```
-
-<center>
-<img src = "images/psdm1.png" style = "width:80%" />
-</center>
-
----
-## Distribución de una especie (SDM: Species Distribution Model)
-```{r, echo = F, eval = F}
-set.seed(1)
-x <- rnorm(10000)
-y <- rnorm(10000)
-p_sdm2 <- smoothScatter(x, y)
-
-```
-
-<center>
-<img src = "images/psdm2.png" style = "width:80%" />
-</center>
-
-
 
 ---
 
